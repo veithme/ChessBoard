@@ -140,6 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChessProject.cpp" />
+    <ClCompile Include="PieceSensor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Piece.h" />
+    <ClInclude Include="PieceSensor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
