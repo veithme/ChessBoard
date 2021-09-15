@@ -3,3 +3,6 @@ Visual Studio/.vs/
 Library/ChessBoardLibrary/.vs/
 Visual Studio/ChessProject.vcxproj
 Visual Studio/ChessProject.vcxproj.filters
+Visual Studio/ChessProject.aps
+Visual Studio/ChessProject.rc
+Visual Studio/resource.h
