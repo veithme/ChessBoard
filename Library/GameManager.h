@@ -1,7 +1,6 @@
 #pragma once
 
-#include "GameManager.h"
-#include "Functions.h"
+#include "Enum.h"
 #include "ChessBoard.h"
 
 #include <iostream>
@@ -53,23 +52,11 @@ class Help : public State {
 class Gameplay : public State {
     protected:
         ChessBoard board; 
-        COLOUR turnColour = COLOUR::WHITE;
+        COLOUR turnColour;
     public:
         STATES update();
         void render();
         Gameplay();
-};
-
-// New High Score
-class NewHighScore : public State {
-    STATES update();
-    void render();
-};
-
-// Hall Of Fame
-class HallOfFame : public State {
-    STATES update();
-    void render();
 };
 
 // Quit

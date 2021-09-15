@@ -1,14 +1,6 @@
 #include "GameManager.h"
+#include "ChessPiece.h"
 #include "Functions.h"
-#include "ChessBoard.h"
-
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <queue>
-#include <map>
-#include <list>
 
 using namespace std;
 
@@ -82,10 +74,15 @@ void Help::render() {
 
 // Gameplay
 Gameplay::Gameplay() {
+    turnColour = COLOUR::WHITE;
 };
 
 STATES Gameplay::update() {
     ChessPiece* selectedPiece;
+    bool valid;
+
+    // Print player turn
+    cout << (turnColour == COLOUR::WHITE ? "White Player Turn" : "Black Player Turn") << endl;
 
     // Piece Selection
     cout << "Select piece: ";
@@ -97,17 +94,20 @@ STATES Gameplay::update() {
     } while (selectedPiece == nullptr);
 
     // Piece movement
+    board.checkValidMoves();
     board.printBoard();
     cout << "Move piece to: ";
     do {
-        bool valid = board.movePiece(selectedPiece, getCoordinateInput());
-        cout << endl << "Invalid selection. Move piece to: ";
+        valid = board.movePiece(selectedPiece, getCoordinateInput());
+        if (!valid) {
+            cout << endl << "Invalid selection. Move piece to: ";
+        }
     } while (!valid);
-    
 
     board.unselectPiece();
+    board.resetValidMoves();
 
-    // Swap turn
+    // Switch turn
     turnColour = (turnColour == COLOUR::WHITE ? COLOUR::BLACK : COLOUR::WHITE);
 
     return STATES::GAMEPLAY;
