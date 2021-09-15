@@ -1,36 +1,24 @@
 #pragma once
 
-// Chess Piece Types & Colours
-enum class PIECETYPE {NONE = 0, PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING};\
-enum class COLOUR {WHITE = 0, BLACK = 1};
-enum ALPHANUM { NONE = 0, A, B, C, D, E, F, G, H };
+#include "Enum.h"
+#include "Structs.h"
 
-// Coordinate Structure
-struct COORDINATE {
-	ALPHANUM X;
-	int Y;
-	bool operator < (const COORDINATE rhs) const { return (this->X < rhs.X) || ((this->X == rhs.X) && (this->Y < rhs.Y)); }
-	bool operator > (const COORDINATE rhs) const { return (this->X > rhs.X) || ((this->X == rhs.X) && (this->Y > rhs.Y)); }
-};
-
-// Array of bools
-struct BOOLBOARD {
-	bool board[H + 1][8 + 1];
-};
+// Forward Declaration of ChessBoard class
+class ChessBoard;
 
 // Base Chess Piece Class
 class ChessPiece {
 	protected:
 		PIECETYPE myPieceType;
 		COLOUR myColour;
-		COORDINATE myCoordinate;
+		ALPHANUM myX;
+		int myY;
 	public:
-		//ChessPiece();
-		ChessPiece(COLOUR newColour, COORDINATE newCoordinate);
+		ChessPiece(COLOUR newColour, ALPHANUM newX, int newY);
 		COLOUR getColour();
 		PIECETYPE getPieceType();
 		virtual char getPieceChar() = 0;
-		virtual void getAvailableMoves(BOOLBOARD* board) = 0;
+		virtual void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard) = 0;
 		void setCoordinate(COORDINATE newCoordinate);
 		COORDINATE getCoordinate();
 };
@@ -38,47 +26,47 @@ class ChessPiece {
 // Pawn
 class Pawn : public ChessPiece {
 	public:
-		Pawn(COLOUR newColour, COORDINATE newCoordinate);
+		Pawn(COLOUR newColour, ALPHANUM newX, int newY);
 		char getPieceChar();
-		void getAvailableMoves(BOOLBOARD* board);
+		void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard);
 };
 
 // Rook
 class Rook : public ChessPiece {
 public:
-	Rook(COLOUR newColour, COORDINATE newCoordinate);
+	Rook(COLOUR newColour, ALPHANUM newX, int newY);
 	char getPieceChar();
-	void getAvailableMoves(BOOLBOARD* board);
+	void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard);
 };
 
 // Knight
 class Knight : public ChessPiece {
 public:
-	Knight(COLOUR newColour, COORDINATE newCoordinate);
+	Knight(COLOUR newColour, ALPHANUM newX, int newY);
 	char getPieceChar();
-	void getAvailableMoves(BOOLBOARD* board);
+	void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard);
 };
 
 // Bishop
 class Bishop : public ChessPiece {
 public:
-	Bishop(COLOUR newColour, COORDINATE newCoordinate);
+	Bishop(COLOUR newColour, ALPHANUM newX, int newY);
 	char getPieceChar();
-	void getAvailableMoves(BOOLBOARD* board);
+	void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard);
 };
 
 // Queen
 class Queen : public ChessPiece {
 public:
-	Queen(COLOUR newColour, COORDINATE newCoordinate);
+	Queen(COLOUR newColour, ALPHANUM newX, int newY);
 	char getPieceChar();
-	void getAvailableMoves(BOOLBOARD* board);
+	void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard);
 };
 
 // King
 class King : public ChessPiece {
 public:
-	King(COLOUR newColour, COORDINATE newCoordinate);
+	King(COLOUR newColour, ALPHANUM newX, int newY);
 	char getPieceChar();
-	void getAvailableMoves(BOOLBOARD* board);
+	void getAvailableMoves(BOOLBOARD* board, ChessBoard* chessBoard);
 };
